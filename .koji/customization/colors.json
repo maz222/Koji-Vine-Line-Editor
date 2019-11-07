@@ -1,6 +1,5 @@
 {
   "colors": {
-    "linkColor": "#47d0fa",
     "backgroundColor": "#395b88",
     "textColor": "#fcfcfc"
   },
@@ -20,11 +19,6 @@
         {
           "key": "backgroundColor",
           "name": "Background color",
-          "type": "color"
-        },
-        {
-          "key": "linkColor",
-          "name": "Link Color",
           "type": "color"
         }
       ]

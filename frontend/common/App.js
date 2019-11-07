@@ -1,41 +1,49 @@
-/**
- * common/App.js
- * 
- * What it Does:
- *   This is our root React Element. The rest of our app is initialized here.
- *   In this file we set up the react context and styled-components theme
- *   to use our koji customization properties. Now anywhere in our react
- *   or styled components we can use these customizations. This file also
- *   sets up wrapConsole.js, which allows us to see console.log()'s in the
- *   koji preview window. Lastly this file sets up an event listener on 
- *   postMessage to see if the editor has sent us any new customization
- *   updates.
- * 
- * Things to Change:
- *   Any element or library that should be globally available accross all
- *   pages should be put here. Also this is a great place to put a router
- *   if you want multiple pages in your application.
- */
-
 import React from 'react';
-import styled from 'styled-components';
-import Router from './Router';
-import Koji from 'koji-tools';
+import styled, { keyframes } from 'styled-components';
+import Koji from '@withkoji/vcc';
 
 const Container = styled.div`
-    padding: 0;
-    margin: 0;
+    background-color: ${() => Koji.config.colors.backgroundColor};
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: ${() => Koji.config.colors.textColor};
+    text-align: center;
 `;
 
-class App extends React.PureComponent {
-  componentWillMount() {
-    Koji.pageLoad();
+const AppLogoSpin = keyframes`
+  from {
+    transform: rotate(0deg);
   }
+  to {
+    transform: rotate(360deg);
+  }
+`;
 
+const Content = styled.div`
+  padding-bottom: 8px;
+`;
+
+const Icon = styled.div`
+    animation: ${AppLogoSpin} infinite 20s linear;
+    height: 50vmin;
+    width: 50vmin;
+    pointer-events: none;
+    background-image: url(${() => Koji.config.images.icon});
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin-bottom: 16px;
+`;
+
+class App extends React.Component {
   render() {
     return (
       <Container>
-        <Router />
+        <h1>{Koji.config.strings.title}</h1>
+        <Icon />
       </Container>
     );
   }

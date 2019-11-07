@@ -1,7 +1,6 @@
 {
   "strings": {
-    "content": "Welcome to your Koji React App",
-    "linkText": "Learn React"
+    "title": "Welcome to your Koji React App"
   },
   "@@editor": [
     {
@@ -11,14 +10,9 @@
       "source": "strings.json",
       "fields": [
         {
-          "key": "content",
-          "name": "Page Content",
-          "description": "The text that is displayed on the page",
-          "type": "text"
-        },
-        {
-          "key": "linkText",
-          "name": "Link Text",
+          "key": "title",
+          "name": "Page Title",
+          "description": "The title that is displayed on the page",
           "type": "text"
         }
       ]
