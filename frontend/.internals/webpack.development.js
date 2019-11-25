@@ -128,6 +128,7 @@ module.exports = {
     disableHostCheck: true,
     historyApiFallback: true,
     overlay: true,
+    public: process.env.KOJI_SERVICE_URL_frontend,
   },
   plugins: [
     new webpack.DefinePlugin({
