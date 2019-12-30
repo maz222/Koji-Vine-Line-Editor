@@ -1,6 +1,10 @@
 {
   "images": {
-    "icon": "https://images.koji-cdn.com/d9c6b38e-08c4-4faf-ae8e-01082c41a0fb/3f83q-9634d620e97345a6b250ca2feb7e5a2e.png"
+    "ground": "https://images.koji-cdn.com/d7c9b383-4810-46c6-b8b3-605af0177386/q6ssr-ground.png",
+    "player": "https://images.koji-cdn.com/d7c9b383-4810-46c6-b8b3-605af0177386/t0o0u-player.png",
+    "box": "https://images.koji-cdn.com/d7c9b383-4810-46c6-b8b3-605af0177386/tkyar-crate.png",
+    "wall": "https://images.koji-cdn.com/d7c9b383-4810-46c6-b8b3-605af0177386/6h81f-block.png",
+    "end": "https://images.koji-cdn.com/d7c9b383-4810-46c6-b8b3-605af0177386/1imef-end.png"
   },
   "@@editor": [
     {
@@ -10,9 +14,33 @@
       "source": "images.json",
       "fields": [
         {
-          "key": "icon",
-          "name": "Icon",
-          "description": "Icon that spins on the page",
+          "key": "ground",
+          "name": "Floor",
+          "description": "Floor tile - goes under all tiles so is visible if there are transparent areas",
+          "type": "image"
+        },
+        {
+          "key": "player",
+          "name": "Player Down",
+          "description": "Player facing down - all other directions will default to this if left empty",
+          "type": "image"
+        },
+        {
+          "key": "box",
+          "name": "Box",
+          "description": "Box for pushing around map",
+          "type": "image"
+        },
+        {
+          "key": "wall",
+          "name": "Wall",
+          "description": "Wall to block areas of the map",
+          "type": "image"
+        },
+        {
+          "key": "end",
+          "name": "End/Exit",
+          "description": "Represents the square where boxes must be pushed to. Will show above all other tiles, use transparent png for best effect.",
           "type": "image"
         }
       ]
