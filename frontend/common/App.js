@@ -1,6 +1,7 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
 import Koji from '@withkoji/vcc';
+import CustomVCC from '@withkoji/custom-vcc-sdk';
 
 const Container = styled.div`
     background-color: ${() => Koji.config.colors.backgroundColor};
@@ -39,11 +40,29 @@ const Icon = styled.div`
 `;
 
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+    
+    this.state = { value: '' };
+    this.customVCC = new CustomVCC();
+  }
+
+    componentDidMount() {
+        this.customVCC.register('300', '300');
+        this.customVCC.onUpdate(({ value }) => {
+            this.setState({ value });
+        });
+    }
+
   render() {
     return (
       <Container>
-        <h1>{Koji.config.strings.title}</h1>
-        <Icon />
+        <textarea
+            onChange={(e) => {
+            this.setState({ value: JSON.parse(e.currentTarget.value) });
+            }}
+            value={JSON.stringify(this.state.value)}
+        />
       </Container>
     );
   }
