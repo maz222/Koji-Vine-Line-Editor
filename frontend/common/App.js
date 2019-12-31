@@ -2,8 +2,7 @@ import React from 'react';
 import styled, { keyframes } from 'styled-components';
 import Koji from '@withkoji/vcc';
 import CustomVCC from '@withkoji/custom-vcc-sdk';
-import { Level } from '../components/Level';
-import { StyledToolBar, StyledToolButton, StyledButtonInner } from './App.styled';
+import { StyledToolBar, StyledToolButton, StyledButtonInner, StyledRow, StyledCellImage } from './App.styled';
 
 const Container = styled.div`
     background-color: ${() => Koji.config.colors.backgroundColor};
@@ -32,7 +31,10 @@ class App extends React.Component {
 
     this.state = {
         'activeTool': 0,
-        'value': {}
+        'value': {
+          level:[[0]],
+          ends: []
+        }
     };
 
     this.images[this.EMPTY] = '';
@@ -152,7 +154,7 @@ class App extends React.Component {
 
   render() {
     const { activeTool } = this.state;
-    console.warn(this.state.value)
+    const level = this.state.value.level; 
     return (
       <Container>
         <StyledToolBar key={'tiles'}>
@@ -179,7 +181,23 @@ class App extends React.Component {
           <StyledToolButton key={3} onClick={this.removeRow}>&mdash; -</StyledToolButton>
         </StyledToolBar>
 
-        <Level value={this.state.value} tileClick={this.tileClick}/>  
+        {level.map((row, row_index) => {
+            return(
+              <StyledRow key={row_index}>
+                {row.map((cell, cell_index) => {
+                  return(
+                    <StyledCellImage
+                      key={cell_index}
+                      occupant={this.images[cell]}
+                      ground={this.groundImage}
+                      end={this.isEnd(cell_index, row_index) ? this.endImage : '' }
+                      onClick={ ()=>{this.tileClick(cell_index,row_index);} }
+                      />
+                  )
+                })}
+              </StyledRow>
+            )
+          })}
       </Container>
     );
   }
