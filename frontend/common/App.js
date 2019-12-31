@@ -30,7 +30,10 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state['activeTool'] = 0;
+    this.state = {
+        'activeTool': 0,
+        'value': {}
+    };
 
     this.images[this.EMPTY] = '';
     this.images[this.PLAYER] = Koji.config.images.player;
@@ -149,6 +152,7 @@ class App extends React.Component {
 
   render() {
     const { activeTool } = this.state;
+    console.warn(this.state.value)
     return (
       <Container>
         <StyledToolBar key={'tiles'}>

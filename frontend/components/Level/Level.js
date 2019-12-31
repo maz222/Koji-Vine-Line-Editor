@@ -26,6 +26,13 @@ export class Level extends React.Component {
     this.endImage = Koji.config.images.end;
   }
 
+  componentDidUpdate() {
+    this.setState({
+        level: this.props.value.level,
+        ends: this.props.value.ends,
+    })
+  }
+
   isEnd = (x,y) => {
     const { ends } = this.state;
     for (var i = ends.length - 1; i >= 0; i--) {
@@ -37,8 +44,15 @@ export class Level extends React.Component {
   };
 
   render() {
-    const { level, ends } = this.state;
+    let { level, ends } = this.state;
     const { tileClick } = this.props;
+    if (level == undefined) {
+        level = []
+    }
+    if (ends == undefined) {
+        ends = []
+    }
+    
     return(
       <div>
         {level.map((row, row_index) => {
