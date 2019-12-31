@@ -49,7 +49,13 @@ class App extends React.Component {
   componentDidMount() {
     this.customVCC.register('300', '300');
     this.customVCC.onUpdate(({ value }) => {
-        this.setState({ value: value });
+      if(value == undefined) {
+        value = {
+          level:[[0]],
+          ends: []
+        };
+      }
+      this.setState({ value: value });
     });
   };
 
