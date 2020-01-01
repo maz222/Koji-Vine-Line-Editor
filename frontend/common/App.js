@@ -6,7 +6,7 @@ import { StyledToolBar, StyledToolButton, StyledButtonInner, StyledRow, StyledCe
 
 const Container = styled.div`
     background-color: ${() => Koji.config.colors.backgroundColor};
-    min-height: 100vh;
+    padding: 20px
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -14,6 +14,7 @@ const Container = styled.div`
     font-size: calc(10px + 2vmin);
     color: ${() => Koji.config.colors.textColor};
     text-align: center;
+    overflow: hidden;
 `;
 
 class App extends React.Component {
