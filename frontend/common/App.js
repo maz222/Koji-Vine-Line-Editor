@@ -2,7 +2,7 @@ import React from 'react';
 import styled, { keyframes } from 'styled-components';
 import Koji from '@withkoji/vcc';
 import CustomVCC from '@withkoji/custom-vcc-sdk';
-import { StyledToolBar, StyledToolButton, StyledButtonInner, StyledRow, StyledCellImage } from './App.styled';
+import { StyledToolBar, StyledToolButton, StyledButtonInner, StyledRow, StyledCellImage, StyledLevel } from './App.styled';
 
 const Container = styled.div`
     background-color: ${() => Koji.config.colors.backgroundColor};
@@ -186,7 +186,7 @@ class App extends React.Component {
           <StyledToolButton key={2} onClick={this.addRow}>&mdash; +</StyledToolButton>
           <StyledToolButton key={3} onClick={this.removeRow}>&mdash; -</StyledToolButton>
         </StyledToolBar>
-
+        <StyledLevel>
         {level.map((row, row_index) => {
             return(
               <StyledRow key={row_index}>
@@ -204,6 +204,7 @@ class App extends React.Component {
               </StyledRow>
             )
           })}
+          </StyledLevel>
       </Container>
     );
   }

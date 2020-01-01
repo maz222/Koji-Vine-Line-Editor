@@ -51,9 +51,11 @@ export const StyledButtonInner = styled.div`
 `;
 
 export const StyledRow = styled.div`
-  display: flex;
+  white-space: nowrap;
 `;
 export const StyledCellImage = styled.div`
+  display: inline-block;
+  vertical-align: top;
   width: 32px;
   height: 32px;
   background-image: url("${props => props.end}"), url("${props => props.occupant}"), url("${props => props.ground}");
@@ -70,4 +72,9 @@ export const StyledCellImage = styled.div`
     bottom: 0;
     background-color: rgba(255,255,255, 0.3);
   }
+`;
+
+export const StyledLevel = styled.div`
+    max-width: 100%;
+    overflow: auto;
 `;
