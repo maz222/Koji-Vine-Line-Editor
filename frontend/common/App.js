@@ -2,7 +2,13 @@ import React from 'react';
 import styled, { keyframes } from 'styled-components';
 import Koji from '@withkoji/vcc';
 import CustomVCC from '@withkoji/custom-vcc-sdk';
-import { StyledToolBar, StyledToolButton, StyledButtonInner, StyledRow, StyledCellImage, StyledLevel } from './App.styled';
+import { StyledToolBar,
+    StyledToolButton,
+    StyledButtonInner,
+    StyledRow,
+    StyledCellImage,
+    StyledLevel,
+    StyledError } from './App.styled';
 
 const Container = styled.div`
     background-color: ${() => Koji.config.colors.backgroundColor};
@@ -35,7 +41,8 @@ class App extends React.Component {
         'value': {
           level:[[0]],
           ends: []
-        }
+        },
+        'errors': []
     };
 
     this.images[this.EMPTY] = '';
@@ -67,6 +74,38 @@ class App extends React.Component {
 
   setTool = (tool) => {
     this.setState({'activeTool': tool});
+  };
+
+  getErrors = (value) => {
+      const { level, ends } = value;
+      let errors = [];
+      let boxCount = 0;
+      let hasPlayer = false;
+      for (var i = level.length - 1; i >= 0; i--) {
+        for (var j = level[i].length - 1; j >= 0; j--) {
+            if (level[i][j] == this.BOX) {
+                boxCount++;
+            }
+            if (level[i][j] == this.WALL && this.isEnd(j, i)) {
+                errors.push('Wall intersects exit');
+            }
+            if (level[i][j] == this.PLAYER) {
+                hasPlayer = true;
+            }
+        }
+      }
+      if (boxCount != ends.length) {
+          errors.push('Number of boxes does not equal number of exits');
+      }
+      if (!hasPlayer) {
+          errors.push('No player in level');
+      }
+      for (var i = ends.length - 1; i >= 0; i--) {
+          if (ends[i].y >= level.length || ends[i].x >= level[0].length) {
+              errors.push('Exit outside of level (' + (ends[i].x+1) + ', ' + (ends[i].y+1) + ')')
+          }
+      }
+      return errors;
   };
 
   clearPlayer = (level) => {
@@ -124,21 +163,21 @@ class App extends React.Component {
       }
     }
 
-    this.setState({ value: value })
+    this.setState({ value: value, errors: this.getErrors(value) })
     this.change(value);
   };
 
   addRow = () => {
     let { value } = this.state;
     value.level.push(Array.from({ length: value.level[0].length }));
-    this.setState({ value: value })
+    this.setState({ value: value, errors: this.getErrors(value) })
     this.change(value);
   };
 
   removeRow = () => {
     let { value } = this.state;
     value.level.splice( value.level.length-1, 1);
-    this.setState({ value: value })
+    this.setState({ value: value, errors: this.getErrors(value) })
     this.change(value);
   };
 
@@ -160,7 +199,7 @@ class App extends React.Component {
   };
 
   render() {
-    const { activeTool } = this.state;
+    const { activeTool, errors } = this.state;
     const level = this.state.value.level; 
     return (
       <Container>
@@ -188,7 +227,7 @@ class App extends React.Component {
           <StyledToolButton key={3} onClick={this.removeRow}>&mdash; -</StyledToolButton>
         </StyledToolBar>
         <StyledLevel>
-        {level.map((row, row_index) => {
+          {level.map((row, row_index) => {
             return(
               <StyledRow key={row_index}>
                 {row.map((cell, cell_index) => {
@@ -205,7 +244,12 @@ class App extends React.Component {
               </StyledRow>
             )
           })}
-          </StyledLevel>
+        </StyledLevel>
+        {errors.map((error, error_id) => {
+            return(
+                <StyledError key={error_id}>{error}</StyledError>
+            )
+        })}
       </Container>
     );
   }

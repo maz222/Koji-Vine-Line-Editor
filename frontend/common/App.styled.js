@@ -78,3 +78,19 @@ export const StyledLevel = styled.div`
     max-width: 100%;
     overflow: auto;
 `;
+
+export const StyledError = styled.p`
+    background-color: red;
+    color: white;
+    font-size: 11px;
+    padding: 5px;
+    margin: 3px 0;
+    &:before {
+        content: '!';
+        display: inline-block;
+        border: 1px solid white;
+        border-radius: 50%;
+        width: 12px;
+        margin-right: 10px;
+    }
+`;
