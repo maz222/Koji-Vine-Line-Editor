@@ -11,7 +11,7 @@ var Bar = styled.div`
 	justify-content:space-around;
 	align-items:center;
 	padding:20px;
-	width:calc(100% - 40px);
+	width:80vw;
     margin-bottom:10px;
 `;
 
