@@ -10,8 +10,10 @@ const DEFAULT_COLS = 10;
 
 let GridCell = styled.div`
     background-color:rgb(100,100,100);
-    width:40px;
-    height:40px;
+    width:8vw;
+    max-width:50px;
+    height:8vw;
+    max-height:50px;
     display:flex;
     justify-content:center;
     align-items:center;
@@ -21,8 +23,10 @@ let GridCell = styled.div`
 `;
 
 let CellImage = styled.img`
-    width:20px;
-    height:20px;
+    width:7vw;
+    max-width:30px;
+    height:7vw;
+    max-height:30px;
 `;
 
 const IMAGES = [
@@ -54,6 +58,9 @@ class App extends React.Component {
 
     componentDidMount() {
         this.customVCC.register('300','300');
+        this.customVCC.onUpdate((newProps) => {
+            this.setState({level:newProps.value});
+        })
     }
 
     expandX() {

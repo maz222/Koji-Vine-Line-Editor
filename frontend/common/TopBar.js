@@ -16,8 +16,10 @@ var Bar = styled.div`
 `;
 
 let ButtonImage = styled.img`
-    width:50px;
-    height:50px;
+    width:8vw;
+    height:8vw;
+    max-width:50px;
+    max-height:50px;
 `;
 
 var Button = styled.button`
