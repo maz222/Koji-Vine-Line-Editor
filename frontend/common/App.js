@@ -59,9 +59,9 @@ class App extends React.Component {
     componentDidMount() {
         this.customVCC.register('300','300');
         this.customVCC.onUpdate((newProps) => {
-            //if(newProps.value != "" && newProps.value != undefined) {
-            //    this.setState({level:newProps.value});
-            //}
+            if(newProps.value != "" && newProps.value != undefined) {
+                this.setState({level:newProps.value});
+            }
         })
     }
 
