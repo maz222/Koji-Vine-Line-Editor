@@ -61,8 +61,22 @@ class App extends React.Component {
         this.customVCC.onUpdate((newProps) => {
             if(newProps.value != "" && newProps.value != undefined) {
                 this.setState({level:newProps.value});
+                this.parseLevel(newProps.value);
             }
         })
+    }
+
+    parseLevel(level) {
+        for(var i=0;i<level.length; i++) {
+            for(var j=0; j<level[i].length; j++) {
+                if(level[i][j] == 1) {
+                    this.setState({startCell:[i,j]});
+                }
+                if(level[i][j] == 4) {
+                    this.setState({exitCell:[i,j]});
+                }
+            }
+        }
     }
 
     expandX() {
